@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Justin Lee - Chef Resume</title>
+    <style>
+        body {
+            font-family: 'Lora', serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f5f5f0;
+            color: #333;
+            display: flex;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        header {
+            background: #f0e6d6;
+            padding: 20px;
+            text-align: center;
+            border-bottom: 2px solid #d0bfae;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+            width: 100%;
+        }
+
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            font-family: 'Playfair Display', serif;
+            color: #6b4f4f;
+        }
+
+        header p {
+            margin: 5px 0 0;
+            font-size: 1.2em;
+            color: #8e6f6f;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: -250px;
+            width: 250px;
+            height: 100%;
+            background: #6b4f4f;
+            color: #fff;
+            transition: left 0.3s ease;
+            overflow-y: auto;
+            z-index: 1000;
+            padding: 20px;
+            box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+        }
+
+        nav.open {
+            left: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            text-decoration: none;
+            color: #fff;
+            font-weight: bold;
+            padding: 15px 20px;
+            display: block;
+            transition: background 0.3s;
+        }
+
+        nav ul li a:hover {
+            background: #8e6f6f;
+            border-radius: 5px;
+        }
+
+        .toggle-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: #6b4f4f;
+            color: #fff;
+            border: none;
+            border-radius: 20%;
+            font-size: 1.5em;
+            text-align: center;
+            line-height: 40px;
+            cursor: pointer;
+            z-index: 1001;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        section {
+            padding: 40px 20px;
+            margin: 0 auto;
+            max-width: 1200px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            flex: 1;
+            margin-left: 260px; /* Space for the sidebar */
+            margin-top: 20px;
+        }
+
+        section h2 {
+            font-size: 2.5em;
+            font-family: 'Playfair Display', serif;
+            border-bottom: 2px solid #d0bfae;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: #6b4f4f;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .gallery-grid img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .timeline {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .timeline li {
+            margin: 30px 0;
+            position: relative;
+        }
+
+        .timeline-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 20px;
+            width: 10px;
+            height: 10px;
+            background: #6b4f4f;
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        footer {
+            background: #6b4f4f;
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+            margin-top: auto;
+            width: 100%;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .contact-info div {
+            flex: 1;
+            min-width: 200px;
+            background: #f0e6d6;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .contact-info div:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-info div i {
+            font-size: 2em;
+            color: #6b4f4f;
+            margin-bottom: 10px;
+        }
+
+        .contact-info div p {
+            margin: 0;
+            font-size: 1.2em;
+            color: #333;
+        }
+
+        .contact-info div a {
+            color: #6b4f4f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;700&family=Playfair+Display:wght@700&display=swap');
+        @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css');
+    </style>
+</head>
+<body>
+    <nav id="sidebar">
+        <ul>
+			<br><br><br><br>
+            <li><a href="#bio">Bio</a></li>
+            <li><a href="#gallery">Food Gallery</a></li>
+            <li><a href="#timeline">Timeline</a></li>
+			<li><a href="#megallery">Gallery</a></li>
+			<li><a href="#contact">Contact Me</a></li>
+			
+        </ul>
+    </nav>
+
+    <button class="toggle-btn" id="toggle-btn">&#9776;</button>
+
+    <div class="content">
+        <header>
+            <h1>Justin Lee</h1>
+            <p> Chef & Culinary Artist</p>
+        </header>
+
+        <section id="bio">
+            <h2>Biography</h2>
+            <p>Greetings from my personal profile. </p>
+			<p>My name is <b>Justin Lee !</b></p>
+			<p>I'm an enthusiastic cook with years of expertise creating tasty meals.</p> 
+			<p>My career in the <b>culinary arts </b>started early since I had a strong interest for preparing and presenting a variety of dishes to patrons.</p>
+			<p>It was an honour for me to work in hotels and resorts around Malaysia. </p>
+			<p>During my university years it light a flame inside which made me further my studies hoping to spead my wings to more exciting prospects.</p>
+        </section>
+
+        <section id="gallery">
+            <h2>Food Gallery</h2>
+            <div class="gallery-grid">
+                <img src="image1.jpg" alt="Dish 1">
+                <img src="image2.jpg" alt="Dish 2">
+                <img src="image3.jpg" alt="Dish 3">
+                <img src="image4.jpg" alt="Dish 4">
+            </div>
+        </section>
+
+        <section id="timeline">
+            <h2>Timeline</h2>
+            <ul class="timeline">
+				<li>
+                    <div class="timeline-content">
+                        <h3>2022</h3>
+                        <p><b>Graduated with Degree & Honors in Culinary Arts from University of Wollongong.</b></p>
+                    </div>
+                </li>
+                <li>
+                    <div class="timeline-content">
+                        <h3>2021</h3>
+                        <p><b>Junior Line Chef at AC Hotel Penang.</b></p>
+						<p>Experience in daily meal planning & prep at odd hours of the day.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="timeline-content">
+                        <h3>2021</h3>
+                        <p><b>Junior Line Chef at Pangkor Laut Resort.</b></p>
+						<p>Experience teamwork and supporting them in various scenario.</p>
+                    </div>
+                </li>
+                <li>
+                    <div class="timeline-content">
+                        <h3>2020</h3>
+                        <p><b>Commis Chef at Majesty Hotel Kuala Lumpur.</b></p>
+						<p>Experience a veriety of job roles both inside and outside the kitchen.</p>
+                    </div>
+                </li>
+				<li>
+                    <div class="timeline-content">
+                        <h3>2019 - 2021</h3>
+                        <p><b>Began my deploma at YTL University College majored in Culinary Arts.</b></p>
+                    </div>
+                </li>
+            </ul>
+        </section>
+		
+		<section id="megallery">
+            <h2>Gallery</h2>
+            <div class="gallery-grid">
+                <img src="image1.jpg" alt="Dish 1">
+                <img src="image2.jpg" alt="Dish 2">
+                <img src="image3.jpg" alt="Dish 3">
+                <img src="image4.jpg" alt="Dish 4">
+            </div>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <div class="contact-info">
+                <div>
+                    <i class="fas fa-phone-alt"></i>
+                    <p><b>+601123458997</b></p>
+                </div>
+                <div>
+                    <i class="fab fa-whatsapp"></i>
+                    <p><a href="https://Wa.me/601123458997">WhatsApp Me</a></p>
+                </div>
+                <div>
+                    <i class="fab fa-linkedin"></i>
+                    <p><a href="https://www.linkedin.com/in/justin-lee-b33920282/?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app">LinkedIn Profile</a></p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>&copy; 2024 Justin Lee. All rights reserved.</p>
+        </footer>
+    </div>
+
+    <script>
+        const toggleBtn = document.getElementById('toggle-btn');
+        const sidebar = document.getElementById('sidebar');
+
+        toggleBtn.addEventListener('click', function() {
+            sidebar.classList.toggle('open');
+        });
+    </script>
+</body>
+</html>
